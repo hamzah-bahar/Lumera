@@ -9,6 +9,11 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('dashboard.categories', ['categories' => Category::all()]);
+        return view('dashboard.categories.index', ['categories' => Category::all()]);
+    }
+
+    public function create()
+    {
+        return view('dashboard.categories.create');
     }
 }

@@ -15,10 +15,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/dashboard/posts', [PostController::class, 'index'])->name('dashboard.posts');
+    Route::get('/dashboard/posts', [PostController::class, 'index'])
+        ->name('dashboard.posts.index');
+    Route::get('/dashbaord/posts/create', [PostController::class, 'create'])
+        ->name('dashboard.posts.create');
 
     Route::get('/dashboard/categories', [CategoryController::class, 'index'])
-        ->name('dashboard.categories');
+        ->name('dashboard.categories.index');
+
+    Route::get('/dashboard/categories/create', [CategoryController::class, 'create'])
+        ->name('dashboard.categories.create');
 
     Route::get('/dashboard/users', [RegisteredUserController::class, 'index'])
         ->name('dashboard.users');
