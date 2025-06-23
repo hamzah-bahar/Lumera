@@ -14,6 +14,14 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+    public function index()
+    {
+        $users = [];
+        if (Auth::user()->role == 'admin') {
+            $users = User::where('id', '!=', Auth::user()->id)->paginate(10);
+        }
+        return view('dashboard.users', ['users' => $users]);
+    }
     /**
      * Display the registration view.
      */
@@ -31,7 +39,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
