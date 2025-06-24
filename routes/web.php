@@ -15,17 +15,33 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // POSTS
     Route::get('/dashboard/posts', [PostController::class, 'index'])
         ->name('dashboard.posts.index');
+
     Route::get('/dashbaord/posts/create', [PostController::class, 'create'])
         ->name('dashboard.posts.create');
 
+    Route::get('/dashboard/posts/show/{post:slug}', [PostController::class, 'show'])
+        ->name('dashboard.posts.show');
+
+    Route::post('/dashboard/posts/create', [PostController::class, 'store'])
+        ->name('dashboard.posts.store');
+
+    Route::delete('/dashboard/posts/delete/{post}', [PostController::class, 'destroy'])
+        ->name('dashboard.posts.destroy');
+
+    // CATEGORIES
     Route::get('/dashboard/categories', [CategoryController::class, 'index'])
         ->name('dashboard.categories.index');
 
     Route::get('/dashboard/categories/create', [CategoryController::class, 'create'])
         ->name('dashboard.categories.create');
 
+    Route::post('/dashboard/categories/create', [CategoryController::class, 'store'])
+        ->name('dashboard.categories.store');
+
+    // USERS
     Route::get('/dashboard/users', [RegisteredUserController::class, 'index'])
         ->name('dashboard.users');
 });
