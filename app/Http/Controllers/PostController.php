@@ -20,11 +20,13 @@ class PostController extends Controller
         }
         return view('dashboard.posts.index', ['posts' => $posts]);
     }
+
     public function create()
     {
         $categories = Category::all();
         return view('dashboard.posts.create', ['categories' => $categories]);
     }
+
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -43,19 +45,67 @@ class PostController extends Controller
 
         $imagePath = $image->store('posts', 'public');
 
-        $data['image'] = Storage::url($imagePath);
+        $data['image'] = $imagePath;
 
         Post::create($data);
 
         return redirect()->route('dashboard.posts.index');
     }
+
     public function show(Post $post)
     {
         return view('dashboard.posts.show', ['post' => $post]);
     }
 
+    public function edit(Post $post)
+    {
+        $categories = Category::all();
+        return view('dashboard.posts.edit', ['post' => $post, 'categories' => $categories]);
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $image = $post->image;
+
+        $post->fill($request->all());
+
+        $changed = $post->getDirty();
+        if (empty($changed)) {
+            return redirect()->route('dashboard.posts.index');
+        }
+
+        $data = $request->validate([
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg',
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        if ($post->isDirty('image')) {
+            // remove old image from storage
+            if ($image && Storage::disk('public')->exists($image)) {
+                Storage::disk('public')->delete($image);
+            }
+            $newImage = $data['image'];
+            unset($data['image']);
+            // store new image
+            $imageUrl = $newImage->store('posts', 'public');
+            $data['image'] = $imageUrl;
+        }
+
+        if ($post->isDirty('title')) {
+            $data['slug'] = \Illuminate\Support\Str::slug($data['title']);
+        }
+        $post->update($data);
+
+        return redirect()->route('dashboard.posts.index');
+    }
+
     public function destroy(Post $post)
     {
+        if ($post->image && Storage::disk('public')->exists($post->image)) {
+            Storage::disk('public')->delete($post->image);
+        }
         $post->delete();
 
         return redirect()->route('dashboard.posts.index');
