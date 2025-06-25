@@ -28,4 +28,28 @@ class CategoryController extends Controller
 
         return redirect()->route('dashboard.categories.index');
     }
+
+    public function update(Request $request, Category $category)
+    {
+        $category->fill($request->all());
+        $changes = $category->getDirty();
+        if (empty($changes)) {
+            return redirect()->route('dashboard.categories.index');
+        }
+
+        $data = $request->validate([
+            'name' => 'required',
+        ]);
+        $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
+
+        $category->update($data);
+
+        return redirect()->route('dashboard.categories.index');
+    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        return redirect()->route('dashboard.categories.index');
+    }
 }

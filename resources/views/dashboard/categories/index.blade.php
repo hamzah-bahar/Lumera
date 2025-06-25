@@ -11,7 +11,7 @@
                 <div class="flex flex-wrap gap-2 p-6 text-gray-900 dark:text-gray-100">
 
                     @foreach ($categories as $category )
-                    <x-category-card :categoryName="$category->name" />
+                    <x-category-card :category="$category" />
                     @endforeach
                 </div>
             </div>
