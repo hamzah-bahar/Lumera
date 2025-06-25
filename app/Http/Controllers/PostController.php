@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         if (Auth::user()->role == 'admin') {
@@ -54,17 +56,20 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $this->authorize('update', $post);
         return view('dashboard.posts.show', ['post' => $post]);
     }
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         $categories = Category::all();
         return view('dashboard.posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
         $image = $post->image;
 
         $post->fill($request->all());
@@ -103,6 +108,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         if ($post->image && Storage::disk('public')->exists($post->image)) {
             Storage::disk('public')->delete($post->image);
         }

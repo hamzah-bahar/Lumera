@@ -18,7 +18,7 @@
                     <p>{{ $post->content }}</p>
                 </div>
             </div>
-
+            @can('delete',$post)
             <x-nav-link :href="route('dashboard.posts.edit',$post->slug)" class="inline-flex items-center px-4 py-2 bg-white
     dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700
     dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none
@@ -26,6 +26,7 @@
     transition ease-in-out duration-150">
                 {{ __('Edit') }}
             </x-nav-link>
+
 
             <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-post-deletion')">{{
                 __('Delete Post') }}</x-danger-button>
@@ -53,6 +54,7 @@
                     </div>
                 </form>
             </x-modal>
+            @endcan
         </div>
     </div>
 </x-app-layout>
