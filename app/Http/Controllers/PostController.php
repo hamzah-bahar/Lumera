@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostCreatedRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -29,15 +30,9 @@ class PostController extends Controller
         return view('dashboard.posts.create', ['categories' => $categories]);
     }
 
-    public function store(Request $request)
+    public function store(PostCreatedRequest $request)
     {
-        $data = $request->validate([
-            "image" => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
-            "title" => ['required'],
-            "content" => ['required'],
-            "category_id" => ['required', 'exists:categories,id'],
-            "published_at" => ['nullable', 'datetime']
-        ]);
+        $data = $request->validated();
 
         $data['user_id'] = Auth::id();
         $data['slug'] = \Illuminate\Support\Str::slug($data['title']);
