@@ -23,8 +23,8 @@
                                     <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, or JPEG</p>
                                 </div>
                                 <x-text-input id="image" type="file" name="image" class="hidden" :value="old('image')" />
+                                <x-input-error :messages="$errors->get('image')" class="mt-2" />
                             </label>
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
                         </div>
 
                         {{-- Title --}}

@@ -3,8 +3,13 @@
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/dashboard/posts', [PostController::class, 'index'])
     ->name('dashboard.posts.index');
+
+Route::get('/dashboard/posts/{category:slug}', [PostController::class, 'byCategory'])
+    ->name('dashboard.posts.byCategory');
 
 Route::get('/dashbaord/posts/create', [PostController::class, 'create'])
     ->name('dashboard.posts.create');

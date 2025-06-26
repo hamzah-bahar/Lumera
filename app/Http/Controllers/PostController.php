@@ -111,4 +111,16 @@ class PostController extends Controller
 
         return redirect()->route('dashboard.posts.index');
     }
+
+    public function byCategory(Category $category)
+    {
+        if (Auth::user()->role === 'admin') {
+            $posts = $category->posts()->latest()->paginate(10);
+        } else {
+            $posts = $category->posts()->where('user_id', Auth::id())->latest()->paginate(10);
+        }
+
+
+        return view('dashboard.posts.index', ['posts' => $posts]);
+    }
 }
