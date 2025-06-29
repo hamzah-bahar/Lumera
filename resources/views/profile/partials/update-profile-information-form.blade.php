@@ -37,7 +37,7 @@
 
         <div>
             <x-input-label for="username" :value="__('Username')" />
-            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->name)" required autofocus autocomplete="username" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->name)" autofocus autocomplete="username" disabled />
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
@@ -68,7 +68,7 @@
         {{-- Bio --}}
         <div class="mt-4">
             <x-input-label for="bio" :value="__('Bio')" />
-            <x-textarea-input id="bio" class="block mt-1 w-full" name="bio" required autofocus>{{ old('bio', $user->bio) }}</x-textarea-input>
+            <x-textarea-input id="bio" class="block mt-1 w-full" name="bio" autofocus>{{ old('bio', $user->bio) }}</x-textarea-input>
             <x-input-error :messages="$errors->get('bio')" class="mt-2" />
         </div>
 

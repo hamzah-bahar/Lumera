@@ -7,18 +7,25 @@
               </a>
 
               <nav class="lg:flex flex-grow items-center gap-8 justify-center">
-                  <a href="/" class="text-xl flex hover:text-black capitalized relative text-black after:absolute after:w-8 after:h-1 after:bg-frontprimary after:rounded-full after:-bottom-1">Home</a>
-                  <a href="{{ route('articles') }}" class="text-xl flex hover:text-black capitalized relative">Articles</a>
+                  <a href="/" class="{{ Route::currentRouteNamed('home') ? 'text-xl flex hover:text-black capitalized relative text-black after:absolute after:w-8 after:h-1 after:bg-frontprimary after:rounded-full after:-bottom-1' :  'text-xl flex hover:text-black capitalized relative'}}">Home</a>
+                  <a href="{{ route('articles') }}" class="{{ Route::currentRouteNamed('articles') ? 'text-xl flex hover:text-black capitalized relative text-black after:absolute after:w-8 after:h-1 after:bg-frontprimary after:rounded-full after:-bottom-1' :  'text-xl flex hover:text-black capitalized relative'}}">Articles</a>
                   <a href="#authors" class="text-xl flex hover:text-black capitalized relative">Authors</a>
                   <a href="#" class="text-xl flex hover:text-black capitalized relative">Testimonial</a>
               </nav>
               <div class="flex items-center gap-4">
-                  <a href="#" class="lg:block bg-frontprimary text-white hover:bg-frontprimary/15 hover:text-frontprimary px-12 py-4 rounded-full text-lg font-medium" />
+                  @guest
+                  <a href="{{ route('login') }}" class="lg:block bg-frontprimary text-white hover:bg-frontprimary/15 hover:text-frontprimary px-6 py-2 rounded-full text-lg font-medium" />
                   Sign In
                   </a>
-                  <a href="#" class="lg:block bg-frontprimary/15 text-frontprimary hover:bg-frontprimary hover:text-white px-12 py-4 rounded-full text-lg font-medium" />
+                  <a href="{{ route('register') }}" class="lg:block bg-frontprimary/15 text-frontprimary hover:bg-frontprimary hover:text-white px-6 py-2 rounded-full text-lg font-medium" />
                   Sign up
                   </a>
+                  @endguest
+                  @auth
+                  <a href="{{ route('dashboard') }}" class="lg:block bg-secondary text-black hover:bg-frontprimary/15 hover:text-frontprimary px-6 py-2 rounded-full text-lg font-medium" />
+                  Dashboard
+                  </a>
+                  @endauth
               </div>
           </div>
           {{-- {navbarOpen && (

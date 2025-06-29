@@ -12,7 +12,7 @@ Route::get('/', function () {
     $popularArticles = Post::where('category_id', 1)
         ->latest()->limit(3)->get();
     return view('front.index', ['pArticles' => $popularArticles]);
-});
+})->name('home');
 
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
