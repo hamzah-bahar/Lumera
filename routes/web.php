@@ -2,13 +2,27 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\front\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $popularArticles = Post::where('category_id', 1)
+        ->latest()->limit(3)->get();
+    return view('front.index', ['pArticles' => $popularArticles]);
 });
+
+
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
+
+Route::get('/articles/{post:slug}', [ArticleController::class, 'show'])->name('articles.show');
+
+Route::get('/users/@{user:username}', function (User $user) {
+    $user->load('posts');
+    return view('front.author', ['user' => $user]);
+})->name('author.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
