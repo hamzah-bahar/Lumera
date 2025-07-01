@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\front\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Post;
@@ -54,6 +55,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // USERS
     Route::get('/dashboard/users', [RegisteredUserController::class, 'index'])
         ->name('dashboard.users');
+
+    // FollowUnfollow 
+    Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])
+        ->name('follow');
 });
 
 

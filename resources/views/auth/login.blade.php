@@ -36,7 +36,7 @@
                                         <!-- Email Address -->
                                         <div>
                                             <x-input-label class="dark:text-gray-700" for="email" :value="__('Email')" />
-                                            <x-text-input id="email" class="block mt-1 w-full dark:bg-gray-50 dark:text-gray-900" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                            <x-text-input id="email" class="block mt-1 w-full dark:bg-white dark:text-gray-900" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
 
@@ -44,7 +44,7 @@
                                         <div class="mt-4">
                                             <x-input-label class="dark:text-gray-700" for="password" :value="__('Password')" />
 
-                                            <x-text-input id="password" class="block mt-1 w-full dark:bg-gray-50 dark:text-gray-900" type="password" name="password" required autocomplete="current-password" />
+                                            <x-text-input id="password" class="block mt-1 w-full dark:bg-white dark:text-gray-900" type="password" name="password" required autocomplete="current-password" />
 
                                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                         </div>
