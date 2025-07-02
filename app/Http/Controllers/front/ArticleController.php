@@ -18,7 +18,8 @@ class ArticleController extends Controller
     public function show(Post $post)
     {
         $post->load(['user', 'category']);
-        return view('front.singleArticle', ['article' => $post]);
+        $relatedArticles = Post::where('category_id', $post->category_id)->limit(3)->get();
+        return view('front.singleArticle', ['article' => $post, 'relatedArticles' => $relatedArticles]);
     }
 
     public function articlesByCategory(Category $category)

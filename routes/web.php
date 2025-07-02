@@ -24,8 +24,8 @@ Route::get('/articles/{post:slug}', [ArticleController::class, 'show'])->name('a
 Route::get('/articles/category/{category:slug}', [ArticleController::class, 'articlesByCategory'])->name('articles.category');
 
 Route::get('/users/@{user:username}', function (User $user) {
-    $user->load('posts');
-    return view('front.author', ['user' => $user]);
+    $posts = $user->posts()->paginate(10);
+    return view('front.author', ['user' => $user, 'posts' => $posts]);
 })->name('author.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -8,10 +8,11 @@
                     <div class="space-y-5 lg:space-y-8">
                         <h2 class="text-3xl font-bold lg:text-5xl dark:text-frontsecondary">Articles</h2>
                         <div class="flex flex-wrap">
-                            @foreach ($user->posts as $article )
+                            @foreach ($posts as $article )
                             <x-front.articleCard width="300px" :article="$article"></x-front.articleCard>
                             @endforeach
                         </div>
+                        {{ $posts->links() }}
                     </div>
                 </div>
             </div>

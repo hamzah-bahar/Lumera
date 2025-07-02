@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -36,6 +37,9 @@ class Post extends Model
 
     public function imageUrl()
     {
-        return Storage::url($this->image);
+        if (Str::contains($this->image, 'posts')) {
+            return Storage::url($this->image);
+        }
+        return $this->image;
     }
 }

@@ -16,7 +16,7 @@
                         <h2 class="text-3xl font-bold lg:text-5xl dark:text-frontsecondary">{{ $article->title }}</h2>
 
                         <div class="flex items-center gap-x-5">
-                            <a class="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-frontprimary dark:text-white dark:hover:bg-frontsecondary dark:focus:bg-frontprimary" href="#">
+                            <a class="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-frontprimary dark:text-white dark:hover:bg-frontsecondary dark:focus:bg-frontprimary" href="{{ route('articles.category', $article->category) }}">
                                 {{ $article->category->name }}
                             </a>
                             <p class="text-xs sm:text-sm text-gray-800 dark:text-gray-800">{{ $article->updated_at->format('M d, Y') }}</p>
@@ -110,46 +110,19 @@
 
                     <div class=" space-y-6">
                                         <!-- Media -->
-                                        <a class="group flex items-center gap-x-6 focus:outline-hidden" href="#">
+                                        @foreach ($relatedArticles as $rArticle )
+                                        <a class="group flex items-center gap-x-6 focus:outline-hidden" href="{{ route('articles.show', $rArticle) }}">
                                             <div class="grow">
                                                 <span class="text-sm font-bold text-gray-800 group-hover:text-frontprimary group-focus:text-blue-600 dark:text-gray-800 dark:group-hover:text-frontprimary dark:group-focus:text-blue-500">
-                                                    5 Reasons to Not start a UX Designer Career in 2022/2023
+                                                    {{ $rArticle->title }}
                                                 </span>
                                             </div>
 
                                             <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                                <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80" alt="Blog Image">
+                                                <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="{{ $rArticle->imageUrl() }}" alt="{{ $rArticle->title }}">
                                             </div>
                                         </a>
-                                        <!-- End Media -->
-
-                                        <!-- Media -->
-                                        <a class="group flex items-center gap-x-6 focus:outline-hidden" href="#">
-                                            <div class="grow">
-                                                <span class="text-sm font-bold text-gray-800 group-hover:text-frontprimary group-focus:text-blue-600 dark:text-gray-800 dark:group-hover:text-frontprimary dark:group-focus:text-blue-500">
-                                                    If your UX Portfolio has this 20% Well Done, it Will Give You an 80% Result
-                                                </span>
-                                            </div>
-
-                                            <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                                <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80" alt="Blog Image">
-                                            </div>
-                                        </a>
-                                        <!-- End Media -->
-
-                                        <!-- Media -->
-                                        <a class="group flex items-center gap-x-6 focus:outline-hidden" href="#">
-                                            <div class="grow">
-                                                <span class="text-sm font-bold text-gray-800 group-hover:text-frontprimary group-focus:text-blue-600 dark:text-gray-800 dark:group-hover:text-frontprimary dark:group-focus:text-blue-500">
-                                                    7 Principles of Icon Design
-                                                </span>
-                                            </div>
-
-                                            <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                                <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80" alt="Blog Image">
-                                            </div>
-                                        </a>
-                                        <!-- End Media -->
+                                        @endforeach
                             </div>
                         </div>
                 </div>

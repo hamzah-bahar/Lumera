@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <div class="flex justify-center mb-8">
-                        <img class="h-64 max-w-xl object-cover rounded-lg shadow-xl dark:shadow-gray-800" src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}">
+                        <img class="h-64 max-w-xl object-cover rounded-lg shadow-xl dark:shadow-gray-800" src="{{ $post->imageUrl() }}" alt="{{ $post->title }}">
                     </div>
 
 
