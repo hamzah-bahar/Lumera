@@ -21,6 +21,8 @@ Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
 
 Route::get('/articles/{post:slug}', [ArticleController::class, 'show'])->name('articles.show');
 
+Route::get('/articles/category/{category:slug}', [ArticleController::class, 'articlesByCategory'])->name('articles.category');
+
 Route::get('/users/@{user:username}', function (User $user) {
     $user->load('posts');
     return view('front.author', ['user' => $user]);

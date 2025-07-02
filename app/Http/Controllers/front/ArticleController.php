@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -18,5 +19,11 @@ class ArticleController extends Controller
     {
         $post->load(['user', 'category']);
         return view('front.singleArticle', ['article' => $post]);
+    }
+
+    public function articlesByCategory(Category $category)
+    {
+        $posts = $category->posts()->latest()->paginate(9);
+        return view('front.articles', ['articles' => $posts]);
     }
 }

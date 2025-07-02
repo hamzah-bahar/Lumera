@@ -8,7 +8,7 @@
 
               <nav class="lg:flex flex-grow items-center gap-8 justify-center">
                   <a href="/" class="{{ Route::currentRouteNamed('home') ? 'text-xl flex hover:text-black capitalized relative text-black after:absolute after:w-8 after:h-1 after:bg-frontprimary after:rounded-full after:-bottom-1' :  'text-xl flex hover:text-black capitalized relative'}}">Home</a>
-                  <a href="{{ route('articles') }}" class="{{ Route::currentRouteNamed('articles') ? 'text-xl flex hover:text-black capitalized relative text-black after:absolute after:w-8 after:h-1 after:bg-frontprimary after:rounded-full after:-bottom-1' :  'text-xl flex hover:text-black capitalized relative'}}">Articles</a>
+                  <a href="{{ route('articles') }}" class="{{ Route::currentRouteNamed('articles') || Route::currentRouteNamed('articles.category') ? 'text-xl flex hover:text-black capitalized relative text-black after:absolute after:w-8 after:h-1 after:bg-frontprimary after:rounded-full after:-bottom-1' :  'text-xl flex hover:text-black capitalized relative'}}">Articles</a>
                   <a href="#authors" class="text-xl flex hover:text-black capitalized relative">Authors</a>
                   <a href="#" class="text-xl flex hover:text-black capitalized relative">Testimonial</a>
               </nav>

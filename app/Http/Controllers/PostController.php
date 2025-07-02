@@ -119,8 +119,6 @@ class PostController extends Controller
         } else {
             $posts = $category->posts()->where('user_id', Auth::id())->latest()->paginate(10);
         }
-
-
         return view('dashboard.posts.index', ['posts' => $posts]);
     }
 }
