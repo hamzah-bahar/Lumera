@@ -15,7 +15,7 @@
                 <h3 class="text-base font-medium text-black opacity-75">{{ $article->readTime() }} min read</h3>
             </div>
             <div class="flex gap-4">
-                <h3 class="text-base font-medium text-black opacity-75">320 claps</h3>
+                <h3 class="text-base font-medium text-black opacity-75">{{ $article->claps->count() }} claps</h3>
             </div>
         </div>
     </div>

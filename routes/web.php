@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClapController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\front\ArticleController;
 use App\Http\Controllers\ProfileController;
@@ -59,6 +60,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // FollowUnfollow 
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])
         ->name('follow');
+
+    // ClapUnclap 
+    Route::post('/clap/{post}', [ClapController::class, 'clapUnclap'])
+        ->name('clap');
 });
 
 

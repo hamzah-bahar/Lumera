@@ -21,6 +21,11 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function claps()
+    {
+        return $this->hasMany(Clap::class);
+    }
+
     public function readTime()
     {
         $words = \Illuminate\Support\Str::wordCount($this->content);

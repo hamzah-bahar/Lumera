@@ -20,6 +20,7 @@
                                 {{ $article->category->name }}
                             </a>
                             <p class="text-xs sm:text-sm text-gray-800 dark:text-gray-800">{{ $article->updated_at->format('M d, Y') }}</p>
+                            <p class="text-sm text-gray-500">{{ $article->readTime() }} min read</p>
                         </div>
 
                         <figure>
@@ -37,11 +38,28 @@
                         <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
                             <div class="flex justify-end items-center gap-x-1.5">
                                 <!-- Button -->
-                                <div class="hs-tooltip inline-block">
-                                    <button type="button" class="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
-                                        875 claps
+                                <div class="hs-tooltip inline-block" x-data="{
+                                        clapsCount: {{ $article->claps->count() }},
+                                        hasClapped: {{ auth()->user() ? auth()->user()->hasClapped($article) ? 'true' : 'false' : 'false' }}, 
+                                        clap(){
+                                            axios.post('{{ route('clap',$article) }}')
+                                                .then(response => {
+                                                    this.hasClapped = !this.hasClapped;
+                                                    this.clapsCount = response.data.clapsCount;
+                                                })
+                                                .catch(error => console.log(error));
+                                        },
+                                    }">
+                                    <button @click="clap()" type="button" class="flex items-center gap-x-2 text-sm text-gray-500 hover:text-black focus:outline-hidden dark:text-gray-600 dark:hover:text-black">
+                                        <template x-if="hasClapped">
+                                            <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="black" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                                        </template>
+                                        <template x-if="!hasClapped">
+                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                                        </template>
+                                        <span x-text="clapsCount"></span> claps
                                     </button>
                                 </div>
                                 <!-- Button -->
