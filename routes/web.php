@@ -47,6 +47,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/dashboard/categories/create', [CategoryController::class, 'store'])
             ->name('dashboard.categories.store');
 
+        Route::get('/dashboard/categories/edit/{category:slug}', [CategoryController::class, 'edit'])
+            ->name('dashboard.categories.edit');
+
         Route::put('/dashboard/categories/update/{category}', [CategoryController::class, 'update'])
             ->name('dashboard.categories.update');
 

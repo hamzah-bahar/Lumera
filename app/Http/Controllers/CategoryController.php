@@ -31,6 +31,11 @@ class CategoryController extends Controller
         return redirect()->route('dashboard.categories.index');
     }
 
+    public function edit(Category $category)
+    {
+        return view('dashboard.categories.edit', ['category' => $category]);
+    }
+
     public function update(Request $request, Category $category)
     {
         $category->fill($request->all());

@@ -9,7 +9,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-wrap gap-2 p-6 text-gray-900 dark:text-gray-100">
-
                     @foreach ($categories as $category )
                     <x-category-card :category="$category" />
                     @endforeach
