@@ -4,18 +4,18 @@ A personal blogging platform built with Laravel, Blade, Alpine.js, and Tailwind 
 
 ## 🚀 Table of Contents
 
--   [Features]
--   [Tech Stack]
--   [Getting Started]
--   [Configuration]
--   [License]
+-   Features
+-   Tech Stack
+-   Getting Started
+-   Configuration
+-   License
 
 ## ⭐ Features
 
--   **[User registration, authentication & authorization]**
--   **[Role-based access control: admin & user roles]**
--   **[CRUD operations: create, read, update, delete posts]**
--   **[Alpine.js-enhanced interactivity]**
+-   **User registration, authentication & authorization**
+-   **Role-based access control: admin & user roles**
+-   **CRUD operations: create, read, update, delete posts**
+-   **Alpine.js-enhanced interactivity**
 
 ## 🧩 Tech Stack
 
@@ -33,7 +33,7 @@ Follow these steps to run Lumera locally:
 
 ```
 # 1. Clone the repo
-git clone https://github.com/your-username/lumera.git
+git clone https://github.com/hamzah-bahar/lumera.git
 cd lumera
 
 # 2. Install backend dependencies
@@ -45,8 +45,8 @@ php artisan key:generate
 
 # 4. Set up your database in `.env`
 
-# 5. Run migrations
-php artisan migrate
+# 5. Run migrations & seed the database
+php artisan migrate --seed
 
 # 6. Install frontend dependencies & build assets
 npm install
